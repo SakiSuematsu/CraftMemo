@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link href="{% static 'list.css' %}" rel="stylesheet">
+{% endblock customcss %}
+
+{% block header %}
+<div class="alert alert-primary" role="alert">
+    <h3>クラフトログ</h3>
+</div>
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div id=list_wrapper>
+        {% for item in object_list %}
+        <div class="alert alert-success" role="alert">
+            <p><a href="{% url 'detail' item.pk %}"><img src="{{ item.craftimage.url }}" alt="{{ item.title }}"></a></p>
+        </div>
+        {% endfor %}
+    </div>
+    <div id=list_wrapper>
+        {% for item in movie_list %}
+        <div class="alert alert-success" role="alert">
+            <p>
+                <a href="{% url 'detail' item.pk %}">
+                    <video controls="controls" width="700" height="350">
+                        <source src="{{ item.craftimage.url }}" height="400px" width="auto">
+                    </video>
+                </a>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'logout' %}">logout</a>
+</div>
+{% else %}
+please login
+{% endif %}
+{% endblock content %}

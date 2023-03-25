@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="alert alert-primary" role="alert">
+    <h3>detail page</h3>
+</div>
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        <p>タイトル:{{ object.title }}</p>
+        <p>投稿者:{{ object.author }}</p>
+        <p>ファイルの種類:{{ object.filetype }}</p>
+        <p><img src="{{ object.craftimage.url }}" height="400px" width="auto"></p>
+        <video controls="controls" width="700" height="350">
+            <source src="{{ object.craftimage.url }}" height="400px" width="auto">
+        </video>
+    </div>
+    <a href="{% url 'list' %}">back</a>
+</div>
+{% else %}
+please login
+{% endif %}
+{% endblock content %}

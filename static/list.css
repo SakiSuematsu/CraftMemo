@@ -1,0 +1,9 @@
+#list_wrapper {
+    display: flex;
+    width: auto;
+}
+
+img {
+    width: auto;
+    height: 300px;
+}

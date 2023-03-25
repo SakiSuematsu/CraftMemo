@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <p>title: <input type="text" name="title"></p>
+    <p>content: <input type="text" name="content"></p>
+    <p>
+        <input type="radio" class="filetype" name="filetype" value="picture" checked>写真
+        <input type="radio" class="filetype" name="filetype" value="movie">動画
+        <input type="radio" class="filetype" name="filetype" value="3d">3Dデータ
+    </p>
+    <p><input type="file" name="craftimage"></p>
+    <input type="hidden" name="author" value="{{user.username}}">
+    <input type="submit" value="create">
+</form>
+
+{% endblock content %}
