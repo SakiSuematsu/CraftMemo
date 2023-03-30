@@ -6,8 +6,11 @@
 {% endblock customcss %}
 
 {% block header %}
-<div class="alert alert-primary" role="alert">
-    <h3>クラフトログ</h3>
+<div class="alert alert-primary" role="alert" id="header-wrapper">
+    <h3 id="title">クラフトログ</h3>
+    <div class="create_btn">
+        <a class="btn btn-primary" href="{% url 'create' %}" role="button">create</a>
+    </div>
 </div>
 {% endblock header %}
 
@@ -15,7 +18,7 @@
 {% if user.is_authenticated %}
 <div class="container">
     <div id=list_wrapper>
-        {% for item in object_list %}
+        {% for item in picture_list %}
         <div class="alert alert-success" role="alert">
             <p><a href="{% url 'detail' item.pk %}"><img src="{{ item.craftimage.url }}" alt="{{ item.title }}"></a></p>
         </div>
@@ -25,8 +28,8 @@
         {% for item in movie_list %}
         <div class="alert alert-success" role="alert">
             <p>
-                <a href="{% url 'detail' item.pk %}">
-                    <video controls="controls" width="700" height="350">
+                <a href="{% url 'detail_m' item.pk %}">
+                    <video controls="controls" width="200" height="150">
                         <source src="{{ item.craftimage.url }}" height="400px" width="auto">
                     </video>
                 </a>

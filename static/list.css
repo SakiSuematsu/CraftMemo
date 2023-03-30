@@ -1,3 +1,17 @@
+#header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#create_btn {
+    display: flex;
+}
+
+#create_btn a {
+    margin-left: 10px;
+}
+
 #list_wrapper {
     display: flex;
     width: auto;
@@ -5,5 +19,5 @@
 
 img {
     width: auto;
-    height: 300px;
+    height: 150px;
 }

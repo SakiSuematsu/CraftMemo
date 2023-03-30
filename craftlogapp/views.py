@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import CraftlogModel
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
-
+from django.views import View
 
 # Create your views here.
 
@@ -34,7 +34,6 @@ def loginfunc(request):
             return render(request, 'login.html', {})
     return render(request, 'login.html', {})
 
-
 def picturelistfunc(request):
     object_list = CraftlogModel.objects.filter(filetype='picture')
     return render(request, 'list.html', {'object_list': object_list})
@@ -43,6 +42,15 @@ def picturelistfunc(request):
 def movielistfunc(request):
     movie_list = CraftlogModel.objects.filter(filetype='movie')
     return render(request, 'list.html', {'movie_list': movie_list})
+
+def combined_list(request):
+    object_list = CraftlogModel.objects.filter(filetype__in=['picture', 'movie', 'audio'])
+    context = {
+        'picture_list': object_list.filter(filetype='picture'),
+        'movie_list': object_list.filter(filetype='movie'),
+        #'audio_list': object_list.filter(filetype='audio'),
+    }
+    return render(request, 'list.html', context)
 
 
 def logoutfunc(request):
@@ -54,6 +62,9 @@ def detailfunc(request, pk):
     object = get_object_or_404(CraftlogModel, pk=pk)
     return render(request, 'detail.html', {'object': object})
 
+def detailmfunc(request, pk):
+    object = get_object_or_404(CraftlogModel, pk=pk)
+    return render(request, 'detail_m.html', {'object': object})
 
 class CraftlogCreate(CreateView):
     template_name = 'create.html'

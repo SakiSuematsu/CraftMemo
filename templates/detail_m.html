@@ -14,7 +14,11 @@
         <p>投稿者:{{ object.author }}</p>
         <p>ファイルの種類:{{ object.filetype }}</p>
         <p>保管場所:{{ object.storage }}</p>
-        <p><img src="{{ object.craftimage.url }}" height="400px" width="auto"></p>
+        <p>
+            <video controls="controls" width="700" height="350">
+                <source src="{{ object.craftimage.url }}" height="400px" width="auto">
+            </video>
+        </p>
     </div>
     <a href="{% url 'list' %}">back</a>
 </div>
