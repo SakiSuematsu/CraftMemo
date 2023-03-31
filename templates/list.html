@@ -9,7 +9,7 @@
 <div class="alert alert-primary" role="alert" id="header-wrapper">
     <h3 id="title">クラフトログ</h3>
     <div class="create_btn">
-        <a class="btn btn-primary" href="{% url 'create' %}" role="button">create</a>
+        <a class="btn btn-primary" href="{% url 'create' %}" role="button">作品を登録する</a>
     </div>
 </div>
 {% endblock header %}
@@ -37,7 +37,7 @@
         </div>
         {% endfor %}
     </div>
-    <a href="{% url 'logout' %}">logout</a>
+    <a href="{% url 'logout' %}">ログアウト</a>
 </div>
 {% else %}
 please login

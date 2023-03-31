@@ -2,7 +2,7 @@
 
 {% block header %}
 <div class="alert alert-primary" role="alert">
-    <h3>detail page</h3>
+    <h3>作品詳細</h3>
 </div>
 {% endblock header %}
 
@@ -16,7 +16,7 @@
         <p>保管場所:{{ object.storage }}</p>
         <p><img src="{{ object.craftimage.url }}" height="400px" width="auto"></p>
     </div>
-    <a href="{% url 'list' %}">back</a>
+    <a href="{% url 'list' %}">戻る</a>
 </div>
 {% else %}
 please login
