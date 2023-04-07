@@ -21,3 +21,11 @@ img {
     width: auto;
     height: 150px;
 }
+
+model-viewer {
+    background-color: #CC99CC;
+}
+
+#reveal {
+    --poster-color: transparent;
+}
