@@ -14,5 +14,7 @@ urlpatterns = [
     path('detail_d/<int:pk>', detaildfunc, name='detail_d'),
     path('create/', CraftlogCreate.as_view(), name='create'),
     path('delete/<int:pk>', CraftlogDelete.as_view(), name='delete'),
+    #path('delete_m/<int:pk>', CraftlogDelete.as_view(), name='delete'),
+    #path('delete_d/<int:pk>', CraftlogDelete.as_view(), name='delete'),
     path('update/<int:pk>', CraftlogUpdate.as_view(), name='update'),
 ]
