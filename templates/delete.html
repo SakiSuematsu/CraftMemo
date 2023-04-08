@@ -2,7 +2,7 @@
 
 {% block header %}
 <div class="alert alert-primary" role="alert">
-    <h3>作品詳細</h3>
+    <h3>作品削除</h3>
 </div>
 {% endblock header %}
 
@@ -14,14 +14,12 @@
         <p>投稿者:{{ object.author }}</p>
         <p>ファイルの種類:{{ object.filetype }}</p>
         <p>保管場所:{{ object.storage }}</p>
-        <p>
-            <video controls="controls" width="700" height="350">
-                <source src="{{ object.craftimage.url }}" height="400px" width="auto">
-            </video>
-        </p>
+        <p><img src="{{ object.craftimage.url }}" height="400px" width="auto"></p>
+
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <input type="submit" value="削除する">
+        </form>
     </div>
-    <a href="{% url 'update' object.pk %}">更新する</a>
-    <a href="{% url 'delete' object.pk %}">削除する</a>
     <a href="{% url 'list' %}">戻る</a>
 </div>
 {% else %}

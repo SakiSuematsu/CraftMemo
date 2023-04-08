@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
-
+{% block header %}
+<div class="alert alert-primary" role="alert">
+    <h3>作品登録</h3>
+</div>
+{% endblock header %}
 {% block content %}
 
 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
@@ -13,7 +17,7 @@
     <p><input type="file" name="craftimage"></p>
     <p>保管場所:<input type="text" name="storage"></p>
     <input type="hidden" name="author" value="{{user.username}}">
-    <input type="submit" value="create">
+    <input type="submit" value="登録する">
 </form>
-
+<a href="{% url 'list' %}">戻る</a>
 {% endblock content %}

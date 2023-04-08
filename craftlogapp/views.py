@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
 from .models import CraftlogModel
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.views import View
 
@@ -43,12 +43,16 @@ def movielistfunc(request):
     movie_list = CraftlogModel.objects.filter(filetype='movie')
     return render(request, 'list.html', {'movie_list': movie_list})
 
+def threedlistfunc(request):
+    threed_list = CraftlogModel.objects.filter(filetype='3d')
+    return render(request, 'list.html', {'threed_list': threed_list})
+
 def combined_list(request):
-    object_list = CraftlogModel.objects.filter(filetype__in=['picture', 'movie', 'audio'])
+    object_list = CraftlogModel.objects.filter(filetype__in=['picture', 'movie', '3d'])
     context = {
         'picture_list': object_list.filter(filetype='picture'),
         'movie_list': object_list.filter(filetype='movie'),
-        #'audio_list': object_list.filter(filetype='audio'),
+        'threed_list': object_list.filter(filetype='3d'),
     }
     return render(request, 'list.html', context)
 
@@ -66,8 +70,23 @@ def detailmfunc(request, pk):
     object = get_object_or_404(CraftlogModel, pk=pk)
     return render(request, 'detail_m.html', {'object': object})
 
+def detaildfunc(request, pk):
+    object = get_object_or_404(CraftlogModel, pk=pk)
+    return render(request, 'detail_d.html', {'object': object})
+
 class CraftlogCreate(CreateView):
     template_name = 'create.html'
     model = CraftlogModel
-    fields = ('title', 'content', 'author', 'filetype', 'craftimage')
+    fields = ('title', 'content', 'author', 'filetype', 'storage', 'craftimage')
+    success_url = reverse_lazy('list')
+
+class CraftlogDelete(DeleteView):
+    template_name = 'delete.html'
+    model = CraftlogModel
+    success_url = reverse_lazy('list')
+
+class CraftlogUpdate(UpdateView):
+    template_name = 'update.html'
+    model = CraftlogModel
+    fields = ('title', 'content', 'author', 'filetype', 'storage', 'craftimage')
     success_url = reverse_lazy('list')

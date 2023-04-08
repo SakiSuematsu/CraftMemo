@@ -9,4 +9,4 @@ class CraftlogModel(models.Model):
     author = models.CharField(max_length=50)
     filetype = models.TextField(default='picture')
     storage  = models.TextField(null=True, blank=True)
-    craftimage = models.FileField(upload_to='')
+    craftimage = models.FileField(upload_to='craftimage')
