@@ -8,29 +8,17 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<style>
-    model-viewer {
-        width: 400px;
-        height: 400px;
-        background-color: #CC99CC;
-    }
-
-    model-viewer#reveal {
-        --poster-color: transparent;
-    }
-</style>
-<!-- コンポーネントをCDNで読み込む -->
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
-
 <div class="container">
     <div class="alert alert-success" role="alert">
         <p>タイトル:{{ object.title }}</p>
-        <p>説明:{{ object.content }}</p>
         <p>投稿者:{{ object.author }}</p>
         <p>ファイルの種類:{{ object.filetype }}</p>
         <p>保管場所:{{ object.storage }}</p>
-        <p><img src="{{ object.craftimage.url }}" height="400px" width="auto"></p>
+        <p>
+            <video controls="controls" width="700" height="350">
+                <source src="{{ object.craftimage.url }}" height="400px" width="auto">
+            </video>
+        </p>
         <form method="POST" enctype="multipart/form-data">{% csrf_token %}
             <input type="submit" value="削除する">
         </form>

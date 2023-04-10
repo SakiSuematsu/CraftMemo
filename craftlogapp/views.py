@@ -34,25 +34,12 @@ def loginfunc(request):
             return render(request, 'login.html', {})
     return render(request, 'login.html', {})
 
-def picturelistfunc(request):
-    object_list = CraftlogModel.objects.filter(filetype='picture')
-    return render(request, 'list.html', {'object_list': object_list})
-
-
-def movielistfunc(request):
-    movie_list = CraftlogModel.objects.filter(filetype='movie')
-    return render(request, 'list.html', {'movie_list': movie_list})
-
-def threedlistfunc(request):
-    threed_list = CraftlogModel.objects.filter(filetype='3d')
-    return render(request, 'list.html', {'threed_list': threed_list})
-
 def combined_list(request):
-    object_list = CraftlogModel.objects.filter(filetype__in=['picture', 'movie', '3d'])
+    object_list = CraftlogModel.objects.filter(filetype__in=['picture', 'movie', '3d'],author=request.user)
     context = {
-        'picture_list': object_list.filter(filetype='picture'),
-        'movie_list': object_list.filter(filetype='movie'),
-        'threed_list': object_list.filter(filetype='3d'),
+        'picture_list': object_list.filter(filetype='picture',author=request.user),
+        'movie_list': object_list.filter(filetype='movie',author=request.user),
+        'threed_list': object_list.filter(filetype='3d',author=request.user),
     }
     return render(request, 'list.html', context)
 
@@ -82,6 +69,16 @@ class CraftlogCreate(CreateView):
 
 class CraftlogDelete(DeleteView):
     template_name = 'delete.html'
+    model = CraftlogModel
+    success_url = reverse_lazy('list')
+
+class CraftlogDeleteM(DeleteView):
+    template_name = 'delete_m.html'
+    model = CraftlogModel
+    success_url = reverse_lazy('list')
+
+class CraftlogDeleteD(DeleteView):
+    template_name = 'delete_d.html'
     model = CraftlogModel
     success_url = reverse_lazy('list')
 
