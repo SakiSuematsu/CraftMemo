@@ -9,6 +9,7 @@
 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
     <p>タイトル: {{ form.title }}</p>
     <p>説明: {{ form.content }}</p>
+    <p hidden>ファイルの種類:{{ form.filetype}}</p>
     <p>{{ form.craftimage }}</p>
     <p>保管場所:{{ form.storage }}</p>
     <input type="hidden" name="author" value="{{user.username}}">

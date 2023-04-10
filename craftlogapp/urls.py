@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signupfunc, loginfunc, logoutfunc, detailfunc, detailmfunc, detaildfunc, CraftlogCreate, CraftlogDelete, CraftlogUpdate, combined_list
+from .views import signupfunc, loginfunc, logoutfunc, detailfunc, detailmfunc, detaildfunc, CraftlogCreate, CraftlogDelete, CraftlogDeleteM, CraftlogDeleteD, CraftlogUpdate, combined_list
 from . import views
 
 urlpatterns = [
@@ -14,7 +14,7 @@ urlpatterns = [
     path('detail_d/<int:pk>', detaildfunc, name='detail_d'),
     path('create/', CraftlogCreate.as_view(), name='create'),
     path('delete/<int:pk>', CraftlogDelete.as_view(), name='delete'),
-    #path('delete_m/<int:pk>', CraftlogDelete.as_view(), name='delete'),
-    #path('delete_d/<int:pk>', CraftlogDelete.as_view(), name='delete'),
+    path('delete_m/<int:pk>', CraftlogDeleteM.as_view(), name='delete_m'),
+    path('delete_d/<int:pk>', CraftlogDeleteD.as_view(), name='delete_d'),
     path('update/<int:pk>', CraftlogUpdate.as_view(), name='update'),
 ]
